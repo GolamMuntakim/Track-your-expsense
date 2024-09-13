@@ -9,7 +9,7 @@ import ExpenseData from './ExpenseData'
 
 function App() {
   const [expenses, setExpenses] = useState(ExpenseData)
-  console.log(expenses)
+  // console.log(expenses)
 
   return (
     <>
@@ -17,7 +17,7 @@ function App() {
         <h1>Track Your Expense</h1>
         <div className="expense-tracker">
           <ExpenseForm></ExpenseForm>
-          <ExpenseTable></ExpenseTable>
+          <ExpenseTable expenses={expenses}></ExpenseTable>
           {/* <ContextMenu></ContextMenu> */}
         </div>
       </main>

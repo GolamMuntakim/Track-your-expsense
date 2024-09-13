@@ -1,6 +1,6 @@
 
 
-const ExpenseTable = () => {
+const ExpenseTable = ({expenses}) => {
     return (
         <div>
              <table className="expense-table">
@@ -47,26 +47,16 @@ const ExpenseTable = () => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Milk</td>
-              <td>Grocery</td>
-              <td>₹40</td>
-            </tr>
-            <tr>
-              <td>Shirt</td>
-              <td>Clothes</td>
-              <td>₹600</td>
-            </tr>
-            <tr>
-              <td>Vegetables</td>
-              <td>Grocery</td>
-              <td>₹100</td>
-            </tr>
-            <tr>
-              <td>Electricity Bill</td>
-              <td>Bills</td>
-              <td>₹1100</td>
-            </tr>
+            {
+                expenses.map((expenses)=>(
+                    <tr key={expenses?.id}>
+                    <td>{expenses?.title}</td>
+                    <td>{expenses?.category}</td>
+                    <td>₹{expenses?.amount}</td>
+                  </tr>
+                ))
+            }
+            
             <tr>
               <th>Total</th>
               <th></th>

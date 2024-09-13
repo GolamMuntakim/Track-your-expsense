@@ -10,7 +10,14 @@ const ExpenseForm = () => {
           </div>
           <div className="input-container">
             <label htmlFor="category">Category</label>
-            <input id="category" />
+            <select id="category">
+                  <option value="">All</option>
+                  <option value="grocery">Grocery</option>
+                  <option value="clothes">Clothes</option>
+                  <option value="bills">Bills</option>
+                  <option value="education">Education</option>
+                  <option value="medicine">Medicine</option>
+                </select>
           </div>
           <div className="input-container">
             <label htmlFor="amount">Amount</label>
