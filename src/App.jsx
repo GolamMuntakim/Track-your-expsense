@@ -16,7 +16,7 @@ function App() {
       <main>
         <h1>Track Your Expense</h1>
         <div className="expense-tracker">
-          <ExpenseForm></ExpenseForm>
+          <ExpenseForm setExpenses={setExpenses}></ExpenseForm>
           <ExpenseTable expenses={expenses}></ExpenseTable>
           {/* <ContextMenu></ContextMenu> */}
         </div>
