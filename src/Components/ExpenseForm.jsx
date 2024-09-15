@@ -1,4 +1,6 @@
 import  { useState } from 'react'
+import Input from './Input'
+import Select from './Select'
 
 export default function ExpenseForm({ setExpenses }) {
   const [expense, setExpense] = useState({
@@ -7,17 +9,28 @@ export default function ExpenseForm({ setExpenses }) {
     amount: '',
   })
   const [errors, setErrors] = useState({})
+
+  const validationConfig = {
+    title : [{required: true , message: 'please enter title'}, {minLength: 5, message : 'Title should be at least 5 characters'}],
+    category : [{required: true , message: 'please select a category'}],
+    amount : [{required: true , message: 'please enter amount '}]
+  }
+
   const validate = (formData) =>{
     const errorsData = {}
-    if(!formData.title){
-        errorsData.title = "Title is required"
-    }
-    if(!formData.category){
-        errorsData.category = 'Category is required'
-    }
-    if(!formData.amount){
-        errorsData.amount = 'Amount is required'
-    }
+    Object.entries(formData).forEach(([key, value])=>{
+     validationConfig[key].some((rule) => {
+      if(rule.required && !value){
+        errorsData[key] = rule.message
+        return true
+      }
+      if(rule.minLength && value.length < 5){
+        errorsData[key] = rule.message
+        return true
+      }
+     })
+    })
+   
     setErrors(errorsData)
     return errorsData
   }
@@ -48,44 +61,11 @@ export default function ExpenseForm({ setExpenses }) {
 
   return (
     <form className="expense-form" onSubmit={handleSubmit}>
-      <div className="input-container">
-        <label htmlFor="title">Title</label>
-        <input
-          id="title"
-          name="title"
-          value={expense.title}
-          onChange={handleChange}
-        />
-        <p>{errors.title}</p>
-      </div>
-      <div className="input-container">
-        <label htmlFor="category">Category</label>
-        <select
-          id="category"
-          name="category"
-          value={expense.category}
-          onChange={handleChange}
-        >
-          <option value="" hidden>
-            Select Category
-          </option>
-          <option value="Grocery">Grocery</option>
-          <option value="Clothes">Clothes</option>
-          <option value="Bills">Bills</option>
-          <option value="Education">Education</option>
-          <option value="Medicine">Medicine</option>
-        </select>
-      </div>
-      <div className="input-container">
-        <label htmlFor="amount">Amount</label>
-        <input
-          id="amount"
-          name="amount"
-          value={expense.amount}
-          onChange={handleChange
-          }
-        />
-      </div>
+      <Input label='Title' id='title' name='title' value={expense.title} onChange={handleChange}
+      error={errors.title}></Input>
+      <Select label="Category" id="category" name="category" value={expense.category} onChange={handleChange} error={errors.category} options={['Grocery', 'Clothes' , 'Bills', 'Education', 'Medicine']} defaultOptions='select'></Select>
+      <Input label='Amount' id='amount' name='amount' value={expense.amount} onChange={handleChange}
+      error={errors.amount}></Input>
       <button className="add-btn">Add</button>
     </form>
   )
