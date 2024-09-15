@@ -64,7 +64,7 @@ export default function ExpenseForm({ setExpenses }) {
       <Input label='Title' id='title' name='title' value={expense.title} onChange={handleChange}
       error={errors.title}></Input>
       <Select label="Category" id="category" name="category" value={expense.category} onChange={handleChange} error={errors.category} options={['Grocery', 'Clothes' , 'Bills', 'Education', 'Medicine']} defaultOptions='select'></Select>
-      <Input label='Amount' id='amount' name='amount' value={expense.amount} onChange={handleChange}
+      <Input label='Amount' id='amount' name='amount' type='number' value={expense.amount} onChange={handleChange}
       error={errors.amount}></Input>
       <button className="add-btn">Add</button>
     </form>
