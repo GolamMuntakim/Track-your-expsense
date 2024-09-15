@@ -1,8 +1,9 @@
 import { useState } from "react";
 
-const useFilter = (data, callback) => {
+const useFilter = (dataList, callback) => {
     const [query, setQuery] = useState('')
-    const filteredData = data.filter((el)=> el.category.toLowerCase().includes(query))
+    console.log(callback)
+    const filteredData = dataList.filter((data)=> callback(data).toLowerCase().includes(query))
      return [filteredData, setQuery]
 };
 

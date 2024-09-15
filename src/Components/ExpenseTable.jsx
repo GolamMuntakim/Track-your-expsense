@@ -4,8 +4,9 @@ import useFilter from "../hooks/useFilter";
 
 const ExpenseTable = ({expenses}) => {
 
-  const [result, setQuery] = useFilter(expenses)
-  console.log(result)
+  const [result, setQuery] = useFilter(expenses, (data)=> data.category)
+  const total =  result.reduce((accumulator, current)=> accumulator + current.amount , 0)
+  console.log(total)
 
 
     return (
@@ -67,7 +68,7 @@ const ExpenseTable = ({expenses}) => {
             <tr>
               <th>Total</th>
               <th></th>
-              <th>₹8100</th>
+              <th>₹{total}</th>
             </tr>
           </tbody>
         </table>
